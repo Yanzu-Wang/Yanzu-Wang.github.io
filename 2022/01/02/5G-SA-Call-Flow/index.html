@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yanzu-wang.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="前言在核心網各網元E2E聯調時, 熟悉信令流程是查漏補缺必備的技能。 這篇文章將結合3GPP R15相關内容對5G SA信令流程進行簡單分析.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5G SA Call Flow">
+<meta property="og:url" content="https://yanzu-wang.github.io/2022/01/02/5G-SA-Call-Flow/index.html">
+<meta property="og:site_name" content="Yanzu&#39;s blog">
+<meta property="og:description" content="前言在核心網各網元E2E聯調時, 熟悉信令流程是查漏補缺必備的技能。 這篇文章將結合3GPP R15相關内容對5G SA信令流程進行簡單分析.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yanzu-wang.github.io/%E6%B3%A8%E5%86%8A%E6%B5%81%E7%A8%8B-R15">
+<meta property="article:published_time" content="2022-01-02T09:10:41.000Z">
+<meta property="article:modified_time" content="2022-01-11T14:29:56.773Z">
+<meta property="article:author" content="Yanzu Wang">
+<meta property="article:tag" content="5G">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanzu-wang.github.io/%E6%B3%A8%E5%86%8A%E6%B5%81%E7%A8%8B-R15">
+
+
+<link rel="canonical" href="https://yanzu-wang.github.io/2022/01/02/5G-SA-Call-Flow/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://yanzu-wang.github.io/2022/01/02/5G-SA-Call-Flow/","path":"2022/01/02/5G-SA-Call-Flow/","title":"5G SA Call Flow"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>5G SA Call Flow | Yanzu's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yanzu's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Give you a red flower</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section">About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <div id="music163player">
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=230 height=90 src="//music.163.com/outchain/player?type=2&id=407761576&auto=1&height=66"></iframe>
+  </div>
+
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5G-SA-%E6%B3%A8%E5%86%8A"><span class="nav-number">2.</span> <span class="nav-text">5G SA 注冊</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-SA%E7%94%A8%E6%88%B6UE%E6%89%93%E9%96%8B%E6%89%8B%E6%A9%9F%E5%98%97%E8%A9%A6%E9%80%B2%E8%A1%8C%E6%95%B8%E6%93%9A%E9%80%A3%E6%8E%A5%E7%9A%84%E6%99%82%E5%80%99%EF%BC%8C%E9%A6%96%E5%85%88%E6%98%AF%E8%A6%81%E7%99%BC%E6%B6%88%E6%81%AF%E7%B5%A6%E5%9F%BA%E7%AB%99RAN%EF%BC%8C%E9%BA%BB%E7%85%A9RAN%E5%B9%AB%E5%BF%99%E6%8A%8AUE%E7%9A%84%E8%AB%8B%E6%B1%82%E5%91%8A%E8%A8%B4%E7%B5%A6%E6%A0%B8%E5%BF%83%E7%B6%B2%E5%90%A7%E3%80%82"><span class="nav-number">2.1.</span> <span class="nav-text">1. SA用戶UE打開手機嘗試進行數據連接的時候，首先是要發消息給基站RAN，麻煩RAN幫忙把UE的請求告訴給核心網吧。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-RAN%E6%94%B6%E5%88%B0%E6%B6%88%E6%81%AF%E8%AA%AAUE%E8%A6%81%E5%B9%AB%E5%BF%99%E5%90%8E%EF%BC%8C%E5%B0%B1%E7%86%B1%E5%BF%83%E7%9A%84%E6%8A%8A%E6%B6%88%E6%81%AF%E8%BD%89%E7%B5%A6%E6%A0%B8%E5%BF%83%E7%B6%B2%E3%80%82"><span class="nav-number">2.2.</span> <span class="nav-text">2. RAN收到消息說UE要幫忙后，就熱心的把消息轉給核心網。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-RAN%E6%B8%AC%E6%89%BE%E5%88%B0%E5%90%88%E9%81%A9%E7%9A%84%E6%8E%A5%E9%A0%ADAMF%E5%90%8E%EF%BC%8C%E5%B0%B1%E6%9C%83%E6%8A%8AUE%E7%9A%84%E6%B6%88%E6%81%AF%E9%80%8F%E5%82%B3%E7%B5%A6AMF%E3%80%82"><span class="nav-number">2.3.</span> <span class="nav-text">3. RAN測找到合適的接頭AMF后，就會把UE的消息透傳給AMF。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Conditional-%E7%95%B6%E5%BE%9E5G-GUTI%E5%BE%97%E5%87%BAUE%E4%B9%8B%E5%89%8D%E6%98%AF%E6%89%BE%E5%85%B6%E4%BB%96%E7%9A%84AMF%E8%BE%A6%E7%90%86%E7%9A%84%E6%B3%A8%E5%86%8A%EF%BC%8C%E5%89%87%E7%95%B6%E5%89%8DAMF%E5%8E%BB%E6%89%BE%E4%B9%8B%E5%89%8D%E7%9A%84AMF%E4%BA%86%E8%A7%A3%E6%83%85%E6%B3%81%E3%80%82"><span class="nav-number">2.4.</span> <span class="nav-text">4. [Conditional]當從5G-GUTI得出UE之前是找其他的AMF辦理的注冊，則當前AMF去找之前的AMF了解情況。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Conditional-%E5%A6%82%E6%9E%9C%E8%88%8A%E7%9A%84AMF%E6%9C%89%E7%9B%B8%E6%87%89%E7%9A%84UE%E4%BF%A1%E6%81%AF%EF%BC%8C%E5%B0%B1%E6%9C%83%E8%BF%94%E5%9B%9E%E7%B5%A6%E7%95%B6%E5%89%8D%E7%9A%84AMF%E3%80%82"><span class="nav-number">2.5.</span> <span class="nav-text">5. [Conditional]如果舊的AMF有相應的UE信息，就會返回給當前的AMF。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Conditional-%E5%A6%82%E6%9E%9CAMF%E7%84%A1%E6%B3%95%E6%A0%B9%E6%93%9A5G-GUTI%E5%BE%9E%E7%95%B6%E5%89%8D%E6%88%96%E8%80%85%E8%88%8A%E7%9A%84AMF%E7%8D%B2%E5%8F%96%E5%88%B0SUCI-%E5%89%87%E6%87%89%E8%A9%B2%E7%99%BC%E8%B5%B7request%E5%8E%BB%E8%A6%81SUCI%E8%99%9F%E7%A2%BC%E3%80%82"><span class="nav-number">2.6.</span> <span class="nav-text">6. [Conditional]如果AMF無法根據5G-GUTI從當前或者舊的AMF獲取到SUCI,則應該發起request去要SUCI號碼。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Conditional-%E6%97%A2%E7%84%B6%E6%A0%B8%E5%BF%83%E7%B6%B2%E6%B8%AC%E8%A6%81%E6%B1%82%E4%BA%86%EF%BC%8CUE%E5%B0%B1%E8%A6%81%E5%9B%9E%E7%AD%94%E3%80%82"><span class="nav-number">2.7.</span> <span class="nav-text">7. [Conditional]既然核心網測要求了，UE就要回答。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-AMF%E6%94%B6%E5%88%B0RAN%E9%80%99%E5%80%8B%E4%B8%AD%E9%96%93%E4%BA%BA%E5%B8%B6%E4%B8%8A%E4%BE%86%E7%9A%84%E6%B6%88%E6%81%AF%E5%BE%8C%EF%BC%8C%E6%89%93%E9%96%8B%E7%9C%8B%E4%BA%86%E4%B8%80%E7%9C%BC%E2%80%A6%E2%80%A6"><span class="nav-number">2.8.</span> <span class="nav-text">8. AMF收到RAN這個中間人帶上來的消息後，打開看了一眼……</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-AMF%E7%9C%8B%E5%AE%8C%E6%B6%88%E6%81%AF%E4%B9%8B%E5%BE%8C%EF%BC%8C%E9%80%9A%E9%81%8ESBI%E6%8E%A5%E5%8F%A3%E5%8D%94%E8%AD%B0%E6%8A%8A%E4%B8%80%E4%BA%9B%E6%9C%89%E5%83%B9%E5%80%BC%E7%9A%84%E5%86%85%E5%AE%B9%E7%B5%A6%E5%88%B0AUSF"><span class="nav-number">2.9.</span> <span class="nav-text">9. AMF看完消息之後，通過SBI接口協議把一些有價值的内容給到AUSF.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Conditional-%E6%94%B6%E5%88%B0%E9%91%92%E6%AC%8A%E6%B6%88%E6%81%AF%E5%90%8E-%E7%95%B6%E5%89%8DAMF%E5%A6%82%E6%9E%9C%E5%90%8C%E6%84%8F%E8%BE%A6%E7%90%86UE%E6%A5%AD%E5%8B%99%EF%BC%8C%E5%89%87%E6%9C%83%E9%80%9A%E7%9F%A5%E5%88%B0%E8%88%8A%E7%9A%84AMF%E3%80%82"><span class="nav-number">2.10.</span> <span class="nav-text">10. [Conditional]收到鑒權消息后, 當前AMF如果同意辦理UE業務，則會通知到舊的AMF。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Conditional-%E5%A6%82%E6%9E%9CUE%E7%9A%84PEI%E5%88%B0%E7%95%B6%E5%89%8D%E6%AD%A5%E9%A9%9F%E6%B2%92%E6%9C%89%E5%BE%9E%E8%88%8A%E7%9A%84AMF%E6%88%96%E8%80%85%E8%87%AA%E8%BA%AB%E6%90%BA%E5%B8%B6%E7%9A%84%E6%B6%88%E6%81%AF%E4%B8%AD%E7%8D%B2%E5%BE%97%EF%BC%8CAMF%E5%B0%B1%E4%B8%8D%E6%A8%82%E6%84%8F%EF%BC%8C%E9%9C%80%E8%A6%81%E6%89%BEUE%E8%A6%81PEI%E7%9A%84%E4%BF%A1%E6%81%AF%E3%80%82"><span class="nav-number">2.11.</span> <span class="nav-text">11. [Conditional]如果UE的PEI到當前步驟沒有從舊的AMF或者自身携帶的消息中獲得，AMF就不樂意，需要找UE要PEI的信息。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-Optionally-%E7%9C%8B%E5%90%84%E5%A4%A7%E5%BB%A0%E5%AE%B6%E6%80%8E%E9%BA%BD%E8%A8%AD%E5%AE%9A%E4%BA%86-%E5%A6%82%E6%9E%9C%E9%9C%80%E8%A6%81%E9%80%B2%E8%A1%8CPEI%E7%9A%84check-%E5%B0%B1%E5%8A%A0%E4%B8%8A%E9%80%99%E4%B8%80%E6%AC%A1%E4%BA%A4%E4%BA%92%E3%80%82"><span class="nav-number">2.12.</span> <span class="nav-text">12. [Optionally]看各大廠家怎麽設定了,如果需要進行PEI的check,就加上這一次交互。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-14-AUSF%E5%91%8A%E8%A8%B4AMF%E9%80%99%E5%80%8B%E5%90%88%E6%B3%95%E4%B9%8B%E5%BE%8C%EF%BC%8CAMF%E9%82%84%E8%A6%81%E5%8E%BB%E8%AE%93%E6%A0%B8%E5%BF%83%E7%B6%B2%E5%85%B6%E4%BB%96%E7%9A%84%E5%85%84%E5%BC%9F%E7%9C%8B%E7%9C%8B%E5%85%B6%E4%BB%96%E7%9A%84%E4%BF%A1%E6%81%AF%E3%80%82"><span class="nav-number">2.13.</span> <span class="nav-text">13-14. AUSF告訴AMF這個合法之後，AMF還要去讓核心網其他的兄弟看看其他的信息。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-16-Optionally-%E5%90%8C%E6%A8%A3%E7%9C%8B%E5%90%84%E5%A4%A7%E5%BB%A0%E5%AE%B6%E6%80%8E%E9%BA%BD%E8%A8%AD%E5%AE%9A%E3%80%82-%E5%A6%82%E6%9E%9C%E9%9C%80%E8%A6%81AMF%E5%8E%BB%E6%89%BEPCF%E7%8D%B2%E5%8F%96%E4%BB%8B%E5%85%A5%E7%AD%96%E7%95%A5%EF%BC%8C%E5%B0%B1%E5%86%8D%E9%BA%BB%E7%85%A9%E4%B8%80%E4%B8%8BNRF%E3%80%82"><span class="nav-number">2.14.</span> <span class="nav-text">15-16. [Optionally]同樣看各大廠家怎麽設定。 如果需要AMF去找PCF獲取介入策略，就再麻煩一下NRF。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-Conditional-%E7%B0%BD%E7%B4%84%E9%A9%97%E8%AD%89%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8CAMF%E6%AA%A2%E6%B8%AC%E5%88%B0UE%E7%9B%B8%E9%97%9C%E4%BF%A1%E6%81%AF%E5%9C%A8SMF%E4%B8%8A%E6%99%82%E5%89%87%E6%9C%83%E8%A7%B8%E7%99%BC%E3%80%82"><span class="nav-number">2.15.</span> <span class="nav-text">17. [Conditional]簽約驗證完成后，AMF檢測到UE相關信息在SMF上時則會觸發。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-19-Conditional-%E7%95%B6%E5%AD%98%E5%9C%A8%E8%88%8A%E7%9A%84AMF%E5%91%8A%E8%A8%B4%E7%95%B6%E5%89%8DAMF-UE%E6%98%AF%E9%80%9A%E9%81%8ENon-3GPP%E6%8E%A5%E5%85%A5%E6%96%B9%E5%BC%8F%E5%8D%B3N3IWF%E6%99%82%EF%BC%8C%E5%B9%B6%E4%B8%94%E5%90%8C%E4%B8%80PLMN%E4%B8%8B%EF%BC%8C%E7%95%B6%E5%89%8DAMF%E8%A7%B8%E7%99%BC%E8%A9%B2%E6%B5%81%E7%A8%8B%E3%80%82"><span class="nav-number">2.16.</span> <span class="nav-text">18-19. [Conditional]當存在舊的AMF告訴當前AMF UE是通過Non-3GPP接入方式即N3IWF時，并且同一PLMN下，當前AMF觸發該流程。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19a-b-c-Conditional-%E5%A6%82%E6%9E%9C%E8%A7%B8%E7%99%BC%E4%BA%8618-19%EF%BC%8C%E8%AA%AC%E6%98%8EUE%E9%80%9A%E9%81%8ENon-3GPP%E6%8E%A5%E5%85%A5%EF%BC%8C%E9%9C%80%E8%A6%81%E5%86%8D%E6%AC%A1%E8%A8%82%E9%96%B2UDM%EF%BC%8C%E4%BF%AE%E6%94%B9%E6%8E%A5%E5%85%A5%E9%A1%9E%E5%9E%8B%E3%80%82"><span class="nav-number">2.17.</span> <span class="nav-text">19a.b.c. [Conditional]如果觸發了18-19，説明UE通過Non-3GPP接入，需要再次訂閲UDM，修改接入類型。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-%E7%B6%93%E9%81%8E%E9%80%99%E4%B8%80%E7%B3%BB%E5%88%97%E7%9A%84%E4%BA%A4%E6%8E%A5%EF%BC%8CAMF%E8%AA%8D%E5%8F%AF%E4%BA%86%E9%80%99%E5%80%8BUE%EF%BC%8C%E6%96%BC%E6%98%AF%E5%91%8A%E8%A8%B4UE-%E4%BD%A0%E7%9A%84%E6%B3%A8%E5%86%8A%E8%AB%8B%E6%B1%82%EF%BC%8C%E6%88%91%E6%8E%A5%E5%8F%97%E4%BA%86"><span class="nav-number">2.18.</span> <span class="nav-text">21. 經過這一系列的交接，AMF認可了這個UE，於是告訴UE,你的注冊請求，我接受了!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-UE%E5%9B%9E%E5%BE%A9AMF%EF%BC%8C%E8%AA%AC%E6%98%8E%E6%B3%A8%E5%86%8A%E5%AE%8C%E6%88%90%EF%BC%8C%E8%AC%9D%E8%AC%9D%E4%BD%A0"><span class="nav-number">2.19.</span> <span class="nav-text">22. UE回復AMF，説明注冊完成，謝謝你!</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yanzu Wang"
+      src="/images/10.jpg">
+  <p class="site-author-name" itemprop="name">Yanzu Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="/599170791@qq.com" title="E-Mail → 599170791@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzu-wang.github.io/2022/01/02/5G-SA-Call-Flow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/10.jpg">
+      <meta itemprop="name" content="Yanzu Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yanzu's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          5G SA Call Flow
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-01-02 17:10:41" itemprop="dateCreated datePublished" datetime="2022-01-02T17:10:41+08:00">2022-01-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-01-11 22:29:56" itemprop="dateModified" datetime="2022-01-11T22:29:56+08:00">2022-01-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在核心網各網元E2E聯調時, 熟悉信令流程是查漏補缺必備的技能。</p>
+<p>這篇文章將結合3GPP R15相關内容對5G SA信令流程進行簡單分析. </p>
+<span id="more"></span>
+
+<h2 id="5G-SA-注冊"><a href="#5G-SA-注冊" class="headerlink" title="5G SA 注冊"></a>5G SA 注冊</h2><p>下圖注冊流程截于23.502 </p>
+<p><img src="/%E6%B3%A8%E5%86%8A%E6%B5%81%E7%A8%8B-R15"></p>
+<h3 id="1-SA用戶UE打開手機嘗試進行數據連接的時候，首先是要發消息給基站RAN，麻煩RAN幫忙把UE的請求告訴給核心網吧。"><a href="#1-SA用戶UE打開手機嘗試進行數據連接的時候，首先是要發消息給基站RAN，麻煩RAN幫忙把UE的請求告訴給核心網吧。" class="headerlink" title="1. SA用戶UE打開手機嘗試進行數據連接的時候，首先是要發消息給基站RAN，麻煩RAN幫忙把UE的請求告訴給核心網吧。"></a>1. SA用戶UE打開手機嘗試進行數據連接的時候，首先是要發消息給基站RAN，麻煩RAN幫忙把UE的請求告訴給核心網吧。</h3><p>那既然UE想要被核心網接納， 就要傳遞一些信息，幫助核心網認定UE是白名單。 這裏3GPP定義了一些參數，是UE可能會携帶的。</p>
+<p>下面參數截于23.502 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AN message (AN parameters， Registration Request (Registration <span class="built_in">type</span>， SUCI or 5G-GUTI or PEI， last visited TAI (<span class="keyword">if</span> available)， Security parameters， Requested NSSAI， [Mapping Of Requested NSSAI]， Default </span><br><span class="line">Configured NSSAI Indication， UE Radio Capability Update， UE MM Core Network Capability， PDU Session status， List Of PDU Sessions To Be Activated， Follow-on request， MICO mode preference， Requested DRX </span><br><span class="line">parameters， [LADN DNN(s) or Indicator Of Requesting LADN Information]， [NAS message container]) and UE Policy Container (the list of PSIs， indication of UE support <span class="keyword">for</span> ANDSP and the operating system identifier)).</span><br></pre></td></tr></table></figure>
+
+<p>官方文檔需要考慮多個場景，往往參數冗雜。 按照生活中的邏輯是， UE帶上來一個手機號碼就可以，與手機號相關的就是參數裏面的SUCI or 5G-GUTI。</p>
+<p>在開卡時候，運營商會分配給用戶一個手機號，每個手機號碼會對應一個SUPI， 而SUCI就是UE通過ECIE-S scheme生成的，隨後携帶在消息中。 對於5G-GUTI，是UE第一次注冊之後，核心網給UE分配的一個標識。</p>
+<p>這樣就可以延伸出兩個場景： UE第一次注冊和UE注冊完成后第二次注冊。</p>
+<p>現在換個角度去核心網。 如果UE第一次注冊携帶SUCI， 核心網如果檢測到這個SUCI不合法，就可以不讓UE上網，如果檢測通過，則放行。 如果UE注冊携帶5G-GUTI，核心網則知道UE之前已經注冊過，可以去找之前的核心網網元拿UE信息。</p>
+<p>當然，實際上判斷邏輯比這個複雜。如果UE携帶了Requested NSSAI，核心網則不止判斷UE號碼，而是會同時判斷NSSAI的值。</p>
+<p>下面參數解釋截于23.501 &amp; 23.503</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">PEI Permanent Equipment Identifier</span><br><span class="line"></span><br><span class="line">DNN Data Network Name </span><br><span class="line"></span><br><span class="line">LADN Local Area Data Network </span><br><span class="line"></span><br><span class="line">DRX Discontinuous Reception</span><br><span class="line"></span><br><span class="line">MICO Mobile Initiated Connection Only</span><br><span class="line"></span><br><span class="line">ANDSP Access Network Discovery &amp; Selection Policy </span><br></pre></td></tr></table></figure>
+
+<h3 id="2-RAN收到消息說UE要幫忙后，就熱心的把消息轉給核心網。"><a href="#2-RAN收到消息說UE要幫忙后，就熱心的把消息轉給核心網。" class="headerlink" title="2. RAN收到消息說UE要幫忙后，就熱心的把消息轉給核心網。"></a>2. RAN收到消息說UE要幫忙后，就熱心的把消息轉給核心網。</h3><p>RAN對接的核心網網元在5G裏面叫AMF，他優先通過5G-GUTI裏蘊含的5G-S-TMSI和GUAMI信息找到合適的AMF。 那如果是SUCI呢，因爲RAN和AMF之間的N2接口基於SCTP,建立的時候是RAN測發起setup，所以RAN測會配置AMF的信息，可以從裏面根據優先級選擇對應的AMF。</p>
+<p>關於5G-GUTI中5G-S-TMSI和GUAMI</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">5G-GUTI = GUAMI+ 5G-TMSI</span><br><span class="line"></span><br><span class="line">GUAMI = MCC+ MNC+ AMF Identifier</span><br><span class="line"></span><br><span class="line">AMF Identifier = AMF Region ID+ AMF Set ID+ AMF Pointer</span><br><span class="line"></span><br><span class="line">5G-S-TMSI = AMF Set ID+ AMF Pointer+ 5G-TMSI</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="3-RAN測找到合適的接頭AMF后，就會把UE的消息透傳給AMF。"><a href="#3-RAN測找到合適的接頭AMF后，就會把UE的消息透傳給AMF。" class="headerlink" title="3. RAN測找到合適的接頭AMF后，就會把UE的消息透傳給AMF。"></a>3. RAN測找到合適的接頭AMF后，就會把UE的消息透傳給AMF。</h3><p>同時，如果RAN是NG-RAN, 則會在UE消息基礎上加一些位置信息。</p>
+<h3 id="4-Conditional-當從5G-GUTI得出UE之前是找其他的AMF辦理的注冊，則當前AMF去找之前的AMF了解情況。"><a href="#4-Conditional-當從5G-GUTI得出UE之前是找其他的AMF辦理的注冊，則當前AMF去找之前的AMF了解情況。" class="headerlink" title="4. [Conditional]當從5G-GUTI得出UE之前是找其他的AMF辦理的注冊，則當前AMF去找之前的AMF了解情況。"></a>4. [Conditional]當從5G-GUTI得出UE之前是找其他的AMF辦理的注冊，則當前AMF去找之前的AMF了解情況。</h3><h3 id="5-Conditional-如果舊的AMF有相應的UE信息，就會返回給當前的AMF。"><a href="#5-Conditional-如果舊的AMF有相應的UE信息，就會返回給當前的AMF。" class="headerlink" title="5. [Conditional]如果舊的AMF有相應的UE信息，就會返回給當前的AMF。"></a>5. [Conditional]如果舊的AMF有相應的UE信息，就會返回給當前的AMF。</h3><h3 id="6-Conditional-如果AMF無法根據5G-GUTI從當前或者舊的AMF獲取到SUCI-則應該發起request去要SUCI號碼。"><a href="#6-Conditional-如果AMF無法根據5G-GUTI從當前或者舊的AMF獲取到SUCI-則應該發起request去要SUCI號碼。" class="headerlink" title="6. [Conditional]如果AMF無法根據5G-GUTI從當前或者舊的AMF獲取到SUCI,則應該發起request去要SUCI號碼。"></a>6. [Conditional]如果AMF無法根據5G-GUTI從當前或者舊的AMF獲取到SUCI,則應該發起request去要SUCI號碼。</h3><h3 id="7-Conditional-既然核心網測要求了，UE就要回答。"><a href="#7-Conditional-既然核心網測要求了，UE就要回答。" class="headerlink" title="7. [Conditional]既然核心網測要求了，UE就要回答。"></a>7. [Conditional]既然核心網測要求了，UE就要回答。</h3><h3 id="8-AMF收到RAN這個中間人帶上來的消息後，打開看了一眼……"><a href="#8-AMF收到RAN這個中間人帶上來的消息後，打開看了一眼……" class="headerlink" title="8. AMF收到RAN這個中間人帶上來的消息後，打開看了一眼……"></a>8. AMF收到RAN這個中間人帶上來的消息後，打開看了一眼……</h3><p>AMF發現這個用戶在我眼裏合法，於是去找其他網元的兄弟去幫忙鑒定。鑒定什麽呢?</p>
+<p>SIM卡製造的過程中，每個卡都是有特殊Key值和OP值，核心網需要去鑒權UE的號碼和SIM卡中的值是否對應。</p>
+<p>5G裏鑒權的網元是AUSF， AMF會根據SUPI或者SUCI去找對應的AUSF, 而且找的過程還很神秘， 要經過一個中間人NRF。</p>
+<p>這個NRF好比是黑道上的綫人，不去直接參與業務交易，但是他手裏有各個大佬的聯絡方式，後面的AMF找UDM,找SMF等等，都要先聯係他。於是AMF通過NRF找到了AUSF。</p>
+<h3 id="9-AMF看完消息之後，通過SBI接口協議把一些有價值的内容給到AUSF"><a href="#9-AMF看完消息之後，通過SBI接口協議把一些有價值的内容給到AUSF" class="headerlink" title="9. AMF看完消息之後，通過SBI接口協議把一些有價值的内容給到AUSF."></a>9. AMF看完消息之後，通過SBI接口協議把一些有價值的内容給到AUSF.</h3><p>5G鑒權的詳細過程希望日後專門可以寫一寫，這裏就略過. 先假裝AUSF完成了對UE的鑒權。</p>
+<h3 id="10-Conditional-收到鑒權消息后-當前AMF如果同意辦理UE業務，則會通知到舊的AMF。"><a href="#10-Conditional-收到鑒權消息后-當前AMF如果同意辦理UE業務，則會通知到舊的AMF。" class="headerlink" title="10. [Conditional]收到鑒權消息后, 當前AMF如果同意辦理UE業務，則會通知到舊的AMF。"></a>10. [Conditional]收到鑒權消息后, 當前AMF如果同意辦理UE業務，則會通知到舊的AMF。</h3><h3 id="11-Conditional-如果UE的PEI到當前步驟沒有從舊的AMF或者自身携帶的消息中獲得，AMF就不樂意，需要找UE要PEI的信息。"><a href="#11-Conditional-如果UE的PEI到當前步驟沒有從舊的AMF或者自身携帶的消息中獲得，AMF就不樂意，需要找UE要PEI的信息。" class="headerlink" title="11. [Conditional]如果UE的PEI到當前步驟沒有從舊的AMF或者自身携帶的消息中獲得，AMF就不樂意，需要找UE要PEI的信息。"></a>11. [Conditional]如果UE的PEI到當前步驟沒有從舊的AMF或者自身携帶的消息中獲得，AMF就不樂意，需要找UE要PEI的信息。</h3><h3 id="12-Optionally-看各大廠家怎麽設定了-如果需要進行PEI的check-就加上這一次交互。"><a href="#12-Optionally-看各大廠家怎麽設定了-如果需要進行PEI的check-就加上這一次交互。" class="headerlink" title="12. [Optionally]看各大廠家怎麽設定了,如果需要進行PEI的check,就加上這一次交互。"></a>12. [Optionally]看各大廠家怎麽設定了,如果需要進行PEI的check,就加上這一次交互。</h3><h3 id="13-14-AUSF告訴AMF這個合法之後，AMF還要去讓核心網其他的兄弟看看其他的信息。"><a href="#13-14-AUSF告訴AMF這個合法之後，AMF還要去讓核心網其他的兄弟看看其他的信息。" class="headerlink" title="13-14. AUSF告訴AMF這個合法之後，AMF還要去讓核心網其他的兄弟看看其他的信息。"></a>13-14. AUSF告訴AMF這個合法之後，AMF還要去讓核心網其他的兄弟看看其他的信息。</h3><p>這裏就又麻煩NRF去找一個叫UDM的網元，UDM後端連著一個數據庫UDR，裏面有一個小本本，記錄這UE的簽約信息。包含UE簽約速率，切片信息，APN信息等。</p>
+<p>比如AMF通過消息找UDM后發現UE簽約的切片是sd 1 sst 1，結果AMF一看你這UE帶上來的怎麽是sd 1 sst 100。即使UE SIM鑒權通過，也會因爲簽約信息被拒絕。</p>
+<p>再比如，因爲AMF訂閲了UDM，那麽當我兒子天天用手機打游戲，不好好學習時，我去營業廳把這個卡簽約的internet APN給刪掉。這個時候UDM就通過Notify，告訴AMF，這個手機的簽約不再有這個APN，之後UE則無法通過這個APN注冊。</p>
+<h3 id="15-16-Optionally-同樣看各大廠家怎麽設定。-如果需要AMF去找PCF獲取介入策略，就再麻煩一下NRF。"><a href="#15-16-Optionally-同樣看各大廠家怎麽設定。-如果需要AMF去找PCF獲取介入策略，就再麻煩一下NRF。" class="headerlink" title="15-16. [Optionally]同樣看各大廠家怎麽設定。 如果需要AMF去找PCF獲取介入策略，就再麻煩一下NRF。"></a>15-16. [Optionally]同樣看各大廠家怎麽設定。 如果需要AMF去找PCF獲取介入策略，就再麻煩一下NRF。</h3><h3 id="17-Conditional-簽約驗證完成后，AMF檢測到UE相關信息在SMF上時則會觸發。"><a href="#17-Conditional-簽約驗證完成后，AMF檢測到UE相關信息在SMF上時則會觸發。" class="headerlink" title="17. [Conditional]簽約驗證完成后，AMF檢測到UE相關信息在SMF上時則會觸發。"></a>17. [Conditional]簽約驗證完成后，AMF檢測到UE相關信息在SMF上時則會觸發。</h3><p>當step1 中消息體携帶List Of PDU Sessions To Be Activated時，AMF會發送Nsmf_PDUSession_UpdateSMContext給SMF去激活會話。</p>
+<h3 id="18-19-Conditional-當存在舊的AMF告訴當前AMF-UE是通過Non-3GPP接入方式即N3IWF時，并且同一PLMN下，當前AMF觸發該流程。"><a href="#18-19-Conditional-當存在舊的AMF告訴當前AMF-UE是通過Non-3GPP接入方式即N3IWF時，并且同一PLMN下，當前AMF觸發該流程。" class="headerlink" title="18-19. [Conditional]當存在舊的AMF告訴當前AMF UE是通過Non-3GPP接入方式即N3IWF時，并且同一PLMN下，當前AMF觸發該流程。"></a>18-19. [Conditional]當存在舊的AMF告訴當前AMF UE是通過Non-3GPP接入方式即N3IWF時，并且同一PLMN下，當前AMF觸發該流程。</h3><h3 id="19a-b-c-Conditional-如果觸發了18-19，説明UE通過Non-3GPP接入，需要再次訂閲UDM，修改接入類型。"><a href="#19a-b-c-Conditional-如果觸發了18-19，説明UE通過Non-3GPP接入，需要再次訂閲UDM，修改接入類型。" class="headerlink" title="19a.b.c. [Conditional]如果觸發了18-19，説明UE通過Non-3GPP接入，需要再次訂閲UDM，修改接入類型。"></a>19a.b.c. [Conditional]如果觸發了18-19，説明UE通過Non-3GPP接入，需要再次訂閲UDM，修改接入類型。</h3><h3 id="21-經過這一系列的交接，AMF認可了這個UE，於是告訴UE-你的注冊請求，我接受了"><a href="#21-經過這一系列的交接，AMF認可了這個UE，於是告訴UE-你的注冊請求，我接受了" class="headerlink" title="21. 經過這一系列的交接，AMF認可了這個UE，於是告訴UE,你的注冊請求，我接受了!"></a>21. 經過這一系列的交接，AMF認可了這個UE，於是告訴UE,你的注冊請求，我接受了!</h3><p>同時下發了一些參數同step1 呼應。 下面參數截于23.502 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">5G-GUTI, Registration Area, Mobility restrictions, PDU Session status, </span><br><span class="line">Allowed NSSAI, [Mapping Of Allowed NSSAI], [Configured NSSAI <span class="keyword">for</span> the Serving PLMN], [Mapping Of Configured NSSAI], [rejected S-NSSAIs], Periodic Registration Update timer, LADN Information and accepted MICO mode, IMS Voice over PS session supported Indication, </span><br><span class="line">Emergency Service Support indicator, Accepted DRX parameters, Network support of Interworking without N26, Access Stratum Connection Establishment NSSAI Inclusion Mode, Network Slicing Subscription Change Indication, Operator-defined access category definitions,</span><br><span class="line">[List of equivalent PLMNs]). The Allowed NSSAI <span class="keyword">for</span> the Access Type <span class="keyword">for</span> the UE is included <span class="keyword">in</span> the N2 message carrying the Registration Accept message.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="22-UE回復AMF，説明注冊完成，謝謝你"><a href="#22-UE回復AMF，説明注冊完成，謝謝你" class="headerlink" title="22. UE回復AMF，説明注冊完成，謝謝你!"></a>22. UE回復AMF，説明注冊完成，謝謝你!</h3>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Yanzu Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://yanzu-wang.github.io/2022/01/02/5G-SA-Call-Flow/" title="5G SA Call Flow">https://yanzu-wang.github.io/2022/01/02/5G-SA-Call-Flow/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+	<div>
+    		
+    		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------ E n d------</div>
+    
+</div>
+
+    		
+ 	</div>
+          <div class="post-tags">
+              <a href="/tags/5G/" rel="tag"><i class="fa fa-tag"></i> 5G</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/25/Trace-all-node/" rel="prev" title="Trace all node">
+                  <i class="fa fa-chevron-left"></i> Trace all node
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yanzu Wang</span>
+</div><script color="0,0,255" opacity="0.7" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>
