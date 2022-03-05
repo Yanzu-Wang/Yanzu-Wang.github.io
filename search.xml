@@ -141,4 +141,86 @@
         <tag>Python</tag>
       </tags>
   </entry>
+  <entry>
+    <title>O(N) Sort</title>
+    <url>/2022/03/05/Leetcode/</url>
+    <content><![CDATA[<h1 id="Backgroud"><a href="#Backgroud" class="headerlink" title="Backgroud"></a>Backgroud</h1><p>Learn basic leetcode knowledage like BubbleSort, InserSort, SelectSort, and see the Java code.</p>
+<p>Try revert to python code.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><span id="more"></span>
+
+<h2 id="SelecSort"><a href="#SelecSort" class="headerlink" title="SelecSort"></a>SelecSort</h2><pre><code class="bash">&#39;&#39;&#39;选择排序
+实现原理：从一个[0....N-1]数组中，依次遍历，选择最小的值与第一个数进行交换
+时间复杂度为O(N²)
+&#39;&#39;&#39;
+
+list = input(&quot;Please enter a list, using space to divide&quot;)
+lists = list.split(&quot; &quot;)
+print(lists)
+
+def SelectSort():
+    i = 0
+    j = 0
+    min = 0
+    while j &lt; len(lists)-1:
+        while i &lt; len(lists)-1:
+            if lists[i+1] &lt; lists[min]:
+                min = i+1
+            i = i+1
+        lists[j], lists[min] = lists[min], lists[j]
+        j = j+1
+        i = j
+    print(lists)
+
+SelectSort()
+
+##BubbleSort
+``` bash
+&#39;&#39;&#39;冒泡排序
+实现原理：从左往右遍历，两个数比较，较大的右移, 每次遍历会确定最后一个最大值
+时间复杂度为O(N²)
+&#39;&#39;&#39;
+
+list = input(&quot;Please enter a list, using space to divide&quot;)
+org_list = list.split(&quot; &quot;)
+print(org_list)
+
+j = len(org_list)
+
+while j &gt; 1:
+    for i in range(j-1):
+        if org_list[i+1] &lt; org_list[i]:
+            org_list[i], org_list[i+1] = org_list[i+1], org_list[i]
+        print(1)
+    j= j-1
+print(org_list)
+
+##InserSort
+``` bash
+&#39;&#39;&#39;
+插入排序，后一个数要是大于前一个，则交换，还要小于前一个，就继续往前交换
+&#39;&#39;&#39;
+
+A = [2, 1, 3, 5, 4, 6, 9, 8, 2, 1]
+
+# def compare():
+for i in range(len(A)-1):
+    if A[i] &gt; A[i+1]:
+        A[i], A[i+1] = A[i+1], A[i]
+        print(A)
+        j = i
+        while j &gt; 1:
+            if A[j] &lt; A[j-1]:
+                A[j-1], A[j] = A[j], A[j-1]
+            j = j - 1
+    print(A)
+
+
+
+</code></pre>
+]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
 </search>
