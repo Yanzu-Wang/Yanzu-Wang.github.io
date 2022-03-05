@@ -28,7 +28,7 @@
 <meta property="og:description" content="BackgroudLearn basic leetcode knowledage like BubbleSort, InserSort, SelectSort, and see the Java code. Try revert to python code. Code">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-05T12:42:53.000Z">
-<meta property="article:modified_time" content="2022-03-05T12:48:49.159Z">
+<meta property="article:modified_time" content="2022-03-05T13:13:51.468Z">
 <meta property="article:author" content="Yanzu Wang">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="algorithm">
@@ -249,7 +249,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-03-05 20:42:53 / Modified: 20:48:49" itemprop="dateCreated datePublished" datetime="2022-03-05T20:42:53+08:00">2022-03-05</time>
+      <time title="Created: 2022-03-05 20:42:53 / Modified: 21:13:51" itemprop="dateCreated datePublished" datetime="2022-03-05T20:42:53+08:00">2022-03-05</time>
     </span>
 
   
@@ -266,75 +266,17 @@
 <p>Try revert to python code.</p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><span id="more"></span>
 
-<h2 id="SelecSort"><a href="#SelecSort" class="headerlink" title="SelecSort"></a>SelecSort</h2><pre><code class="bash">&#39;&#39;&#39;选择排序
-实现原理：从一个[0....N-1]数组中，依次遍历，选择最小的值与第一个数进行交换
-时间复杂度为O(N²)
-&#39;&#39;&#39;
+<h2 id="SelecSort"><a href="#SelecSort" class="headerlink" title="SelecSort"></a>SelecSort</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span><span class="string">&#x27;选择排序</span></span><br><span class="line"><span class="string">实现原理：从一个[0....N-1]数组中，依次遍历，选择最小的值与第一个数进行交换</span></span><br><span class="line"><span class="string">时间复杂度为O(N²)</span></span><br><span class="line"><span class="string">&#x27;</span><span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">list = input(<span class="string">&quot;Please enter a list, using space to divide&quot;</span>)</span><br><span class="line">lists = list.split(<span class="string">&quot; &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(lists)</span><br><span class="line"></span><br><span class="line">def SelectSort():</span><br><span class="line">    i = 0</span><br><span class="line">    j = 0</span><br><span class="line">    min = 0</span><br><span class="line">    <span class="keyword">while</span> j &lt; len(lists)-1:</span><br><span class="line">        <span class="keyword">while</span> i &lt; len(lists)-1:</span><br><span class="line">            <span class="keyword">if</span> lists[i+1] &lt; lists[min]:</span><br><span class="line">                min = i+1</span><br><span class="line">            i = i+1</span><br><span class="line">        lists[j], lists[min] = lists[min], lists[j]</span><br><span class="line">        j = j+1</span><br><span class="line">        i = j</span><br><span class="line">    <span class="built_in">print</span>(lists)</span><br><span class="line"></span><br><span class="line">SelectSort()</span><br></pre></td></tr></table></figure>
 
-list = input(&quot;Please enter a list, using space to divide&quot;)
-lists = list.split(&quot; &quot;)
-print(lists)
+<p>##BubbleSort</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span><span class="string">&#x27;冒泡排序</span></span><br><span class="line"><span class="string">实现原理：从左往右遍历，两个数比较，较大的右移, 每次遍历会确定最后一个最大值</span></span><br><span class="line"><span class="string">时间复杂度为O(N²)</span></span><br><span class="line"><span class="string">&#x27;</span><span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">list = input(<span class="string">&quot;Please enter a list, using space to divide&quot;</span>)</span><br><span class="line">org_list = list.split(<span class="string">&quot; &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(org_list)</span><br><span class="line"></span><br><span class="line">j = len(org_list)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> j &gt; 1:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(j-1):</span><br><span class="line">        <span class="keyword">if</span> org_list[i+1] &lt; org_list[i]:</span><br><span class="line">            org_list[i], org_list[i+1] = org_list[i+1], org_list[i]</span><br><span class="line">        <span class="built_in">print</span>(1)</span><br><span class="line">    j= j-1</span><br><span class="line"><span class="built_in">print</span>(org_list)</span><br></pre></td></tr></table></figure>
 
-def SelectSort():
-    i = 0
-    j = 0
-    min = 0
-    while j &lt; len(lists)-1:
-        while i &lt; len(lists)-1:
-            if lists[i+1] &lt; lists[min]:
-                min = i+1
-            i = i+1
-        lists[j], lists[min] = lists[min], lists[j]
-        j = j+1
-        i = j
-    print(lists)
 
-SelectSort()
-
-##BubbleSort
-``` bash
-&#39;&#39;&#39;冒泡排序
-实现原理：从左往右遍历，两个数比较，较大的右移, 每次遍历会确定最后一个最大值
-时间复杂度为O(N²)
-&#39;&#39;&#39;
-
-list = input(&quot;Please enter a list, using space to divide&quot;)
-org_list = list.split(&quot; &quot;)
-print(org_list)
-
-j = len(org_list)
-
-while j &gt; 1:
-    for i in range(j-1):
-        if org_list[i+1] &lt; org_list[i]:
-            org_list[i], org_list[i+1] = org_list[i+1], org_list[i]
-        print(1)
-    j= j-1
-print(org_list)
-
-##InserSort
-``` bash
-&#39;&#39;&#39;
-插入排序，后一个数要是大于前一个，则交换，还要小于前一个，就继续往前交换
-&#39;&#39;&#39;
-
-A = [2, 1, 3, 5, 4, 6, 9, 8, 2, 1]
-
-# def compare():
-for i in range(len(A)-1):
-    if A[i] &gt; A[i+1]:
-        A[i], A[i+1] = A[i+1], A[i]
-        print(A)
-        j = i
-        while j &gt; 1:
-            if A[j] &lt; A[j-1]:
-                A[j-1], A[j] = A[j], A[j-1]
-            j = j - 1
-    print(A)
+<p>##InserSort</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">插入排序，后一个数要是大于前一个，则交换，还要小于前一个，就继续往前交换</span></span><br><span class="line"><span class="string">&#x27;</span><span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">A = [2, 1, 3, 5, 4, 6, 9, 8, 2, 1]</span><br><span class="line"></span><br><span class="line"><span class="comment"># def compare():</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(A)-1):</span><br><span class="line">    <span class="keyword">if</span> A[i] &gt; A[i+1]:</span><br><span class="line">        A[i], A[i+1] = A[i+1], A[i]</span><br><span class="line">        <span class="built_in">print</span>(A)</span><br><span class="line">        j = i</span><br><span class="line">        <span class="keyword">while</span> j &gt; 1:</span><br><span class="line">            <span class="keyword">if</span> A[j] &lt; A[j-1]:</span><br><span class="line">                A[j-1], A[j] = A[j], A[j-1]</span><br><span class="line">            j = j - 1</span><br><span class="line">    <span class="built_in">print</span>(A)</span><br></pre></td></tr></table></figure>
 
 
 
-</code></pre>
 
     </div>
 
