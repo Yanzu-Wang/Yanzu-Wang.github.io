@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yanzu-wang.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="BackgroudIf we face many node to maintain, and want login without remember flexible password. Please try below script! Just add node info on a txt file, and replace the path of txt file on the script">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssh-tool">
+<meta property="og:url" content="https://yanzu-wang.github.io/2022/05/10/ssh-tool/index.html">
+<meta property="og:site_name" content="Yanzu&#39;s blog">
+<meta property="og:description" content="BackgroudIf we face many node to maintain, and want login without remember flexible password. Please try below script! Just add node info on a txt file, and replace the path of txt file on the script">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-10T08:50:04.000Z">
+<meta property="article:modified_time" content="2022-05-10T09:04:32.557Z">
+<meta property="article:author" content="Yanzu Wang">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://yanzu-wang.github.io/2022/05/10/ssh-tool/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://yanzu-wang.github.io/2022/05/10/ssh-tool/","path":"2022/05/10/ssh-tool/","title":"ssh-tool"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ssh-tool | Yanzu's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yanzu's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Give you a red flower</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section">About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <div id="music163player">
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=230 height=90 src="//music.163.com/outchain/player?type=2&id=407761576&auto=1&height=66"></iframe>
+  </div>
+
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Backgroud"><span class="nav-number">1.</span> <span class="nav-text">Backgroud</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Script"><span class="nav-number">2.</span> <span class="nav-text">Script</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autocomlete"><span class="nav-number">3.</span> <span class="nav-text">Autocomlete</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yanzu Wang"
+      src="/images/10.jpg">
+  <p class="site-author-name" itemprop="name">Yanzu Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="/599170791@qq.com" title="E-Mail → 599170791@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzu-wang.github.io/2022/05/10/ssh-tool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/10.jpg">
+      <meta itemprop="name" content="Yanzu Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yanzu's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ssh-tool
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-05-10 16:50:04 / Modified: 17:04:32" itemprop="dateCreated datePublished" datetime="2022-05-10T16:50:04+08:00">2022-05-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Backgroud"><a href="#Backgroud" class="headerlink" title="Backgroud"></a>Backgroud</h1><p>If we face many node to maintain, and want login without remember flexible password.</p>
+<p>Please try below script! Just add node info on a txt file, and replace the path of txt file on the script ! Then you can login the node you want!</p>
+<p>Put it on the /usr/bin/, and create a new bash autocomplete. Can login node everywhere!</p>
+<h1 id="Script"><a href="#Script" class="headerlink" title="Script"></a>Script</h1><span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment">#_*_ coding:utf-8 _*_</span></span><br><span class="line"><span class="comment">#Version: 1.0</span></span><br><span class="line"><span class="comment">#Author: Yanzu Wang</span></span><br><span class="line"><span class="comment"># 抄袭部分From Min</span></span><br><span class="line"><span class="comment"># Version 1.0 实现读取node_file中的某一行，进行ssh登录</span></span><br><span class="line"><span class="comment"># Version 2.0 实现删除Knowhost/需要输入确认</span></span><br><span class="line"><span class="comment"># Version 3.0 加入 -h 方法,csv方法</span></span><br><span class="line"><span class="comment"># Version 4.0 修复密码为空时无法登录的问题; 修复登录之后winzize过于小的问题</span></span><br><span class="line"></span><br><span class="line">import pexpect, sys, os, csv</span><br><span class="line"></span><br><span class="line">node_file = <span class="string">&#x27;/home/test/eaajnwi/node_file&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def login(node):</span><br><span class="line">    f = open(node_file)</span><br><span class="line">    node_info = []</span><br><span class="line">    winsize = getwinsize()</span><br><span class="line">    <span class="comment">#lines = f.readlines()</span></span><br><span class="line">    <span class="comment">#for line in lines:</span></span><br><span class="line">    <span class="comment">#    if line.split(&quot;,&quot;)[0] == str(sys.argv[1]):</span></span><br><span class="line">    <span class="comment">#        node_info = line.split(&quot;,&quot;)</span></span><br><span class="line">    lines = csv.reader(f)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">        <span class="keyword">if</span> line[0] == str(sys.argv[1]):</span><br><span class="line">            node_info = line</span><br><span class="line">    <span class="keyword">if</span> len(node_info) == 0:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Error: No Such Node find on the node_file !&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Please use s8 --help or -h to check usage !&quot;</span>)</span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">        </span><br><span class="line">    node_ip = node_info[1]</span><br><span class="line">    username = node_info[2]</span><br><span class="line">    password = node_info[3]</span><br><span class="line">    port = node_info[4]</span><br><span class="line"></span><br><span class="line"><span class="comment"># #基于paramiko实现</span></span><br><span class="line"><span class="comment"># # ssh = paramiko.SSHClient()</span></span><br><span class="line"><span class="comment"># # ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span></span><br><span class="line"><span class="comment"># # ssh.connect(node_ip,int(port),username,password,timeout=10)</span></span><br><span class="line"><span class="comment"># # # stdin：标准输入（就是你输入的命令）；stdout：标准输出（就是命令执行结果）；stderr:标准错误（命令执行过程中如果出错了就把错误打到这里），stdout和stderr仅会输出一个</span></span><br><span class="line"><span class="comment"># # stdin, stdout, stderr = ssh.exec_command(&#x27;pwd&#x27;)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#基于pexpect实现</span></span><br><span class="line">    ssh_node = pexpect.spawn(<span class="string">&#x27;ssh -p %s %s@%s&#x27;</span> % (port,username,node_ip))</span><br><span class="line">    ssh_node.setwinsize(winsize[1], winsize[0])</span><br><span class="line">    try:</span><br><span class="line">        i = ssh_node.expect([<span class="string">&#x27;.*Are you sure you want to continue connecting (yes/no)?&#x27;</span>,<span class="string">&#x27;.*assword.*&#x27;</span>,<span class="string">&#x27;Host key verification failed.&#x27;</span>,<span class="string">&#x27;Last login.*&#x27;</span>])</span><br><span class="line">        <span class="keyword">if</span> i == 0:</span><br><span class="line">            ssh_node.sendline(<span class="string">&#x27;yes&#x27;</span>)</span><br><span class="line">            i = ssh_node.expect([<span class="string">&#x27;.*Are you sure you want to continue connecting (yes/no)?&#x27;</span>,<span class="string">&#x27;.*assword.*&#x27;</span>])</span><br><span class="line">        <span class="keyword">if</span> i == 1:</span><br><span class="line">            ssh_node.sendline(password)</span><br><span class="line">        <span class="comment"># 判断Know host是否存在</span></span><br><span class="line">        <span class="keyword">if</span> i == 2:</span><br><span class="line">            know_host_path = os.path.expandvars(<span class="string">&#x27;$HOME&#x27;</span>)</span><br><span class="line">            <span class="comment"># ssh_node.sendline(&#x27;ssh-keygen -f &quot;%s/.ssh/known_hosts&quot; -R &quot;%s&quot;&#x27; % (know_host_path, node_ip))</span></span><br><span class="line">            os.system(<span class="string">&#x27;ssh-keygen -f &quot;%s/.ssh/known_hosts&quot; -R &quot;%s&quot;&#x27;</span> % (know_host_path, node_ip))</span><br><span class="line">            i = ssh_node.expect([<span class="string">&#x27;.*Are you sure you want to continue connecting (yes/no)?&#x27;</span>, <span class="string">&#x27;.*assword.*&#x27;</span>,<span class="string">&#x27;Host key verification failed.&#x27;</span>])</span><br><span class="line">        <span class="keyword">if</span> i == 4:</span><br><span class="line">        <span class="comment"># 如果密码为空, 已经免密登录的时候</span></span><br><span class="line">            ssh_node.sendline(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    except IOError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Error, please check the node info !&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ssh_node.expect(<span class="string">&#x27;.*&#x27;</span>)</span><br><span class="line">        ssh_node.sendline(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        ssh_node.interact()</span><br><span class="line">        ssh_node.close()</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">def list():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Below output are available nodes to login:   &quot;</span>)</span><br><span class="line">    os.system(<span class="string">&#x27;cat %s | awk -F \&#x27;</span>,\<span class="string">&#x27; \&#x27;</span>&#123;<span class="keyword">if</span>(<span class="variable">$1</span>!=\&quot; \&quot;)<span class="built_in">print</span> <span class="variable">$1</span>&#125;\<span class="string">&#x27;&#x27;</span> % node_file)</span><br><span class="line"></span><br><span class="line">def usage(s8name):</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;This is used for quickly login nodes based on special node name in the file:\&quot;%s\&quot;&quot;</span> % node_file)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;Usage: %s node [-h] [-l \&quot;clis\&quot;]&quot;</span>%s8name)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;Options:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;  node    Node     Set node name to login&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;  -h      Help     Show the help&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;  -l      CLI      List available nodes to login&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;Example:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;-----------------------------------\n&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;  Login the node hk:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;  user@host&gt; %s hk\n&quot;</span>%s2name)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;  Login the node hk and perform clis:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;-----------------------------------\n&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;Nodes info can be updated into file:%s&quot;</span>% node_file)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;Format in the file:node_name,ip,user,password,port&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;Options:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;1.Node name must be unique in the file!&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;2.If no special port,set default 22!&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;3.Password can be empty!&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;An example without password:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;hk,192.168.10.5,admin,,22\n&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;4.If password contain comma, please use quotation marked!&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;An example if password with comma:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;hk,192.168.10.5,admin,&#x27;Test,tree,on&#x27;,22\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">def getwinsize():</span><br><span class="line">    columns, rows = os.get_terminal_size(0)</span><br><span class="line">    <span class="built_in">return</span> columns, rows</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">if</span> str(sys.argv[1]) <span class="keyword">in</span> (<span class="string">&#x27;-h&#x27;</span>):</span><br><span class="line">        usage(<span class="string">&#x27;s8&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> str(sys.argv[1]) <span class="keyword">in</span> (<span class="string">&#x27;-l&#x27;</span>):</span><br><span class="line">        list()</span><br><span class="line">    <span class="keyword">elif</span> len(sys.argv) &lt; 2:</span><br><span class="line">        <span class="built_in">print</span> (<span class="string">&quot;ERROR: missing node name&quot;</span>)</span><br><span class="line">        usage(<span class="string">&#x27;s8&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        login(str(sys.argv[1]))</span><br></pre></td></tr></table></figure>
+
+<h1 id="Autocomlete"><a href="#Autocomlete" class="headerlink" title="Autocomlete"></a>Autocomlete</h1><p>实现Tab 补全, 可自动弹出node名称.  在/etc/bash_completion.d/下新建文件 例S8_compelte，添加以下内容.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># s8 completion</span></span><br><span class="line"><span class="comment">#   </span></span><br><span class="line"><span class="function"><span class="title">_login_s8</span></span>()  </span><br><span class="line">&#123;       </span><br><span class="line">    node_file=/home/<span class="built_in">test</span>/eaajnwi/node_file</span><br><span class="line">    <span class="keyword">if</span> [ -f  <span class="variable">$node_file</span> ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">local</span> pre cur opts</span><br><span class="line">        <span class="built_in">local</span> node_name_list=(`cat <span class="variable">$node_file</span> | grep -vE <span class="string">&quot;^#&quot;</span> | awk -F <span class="string">&#x27;,&#x27;</span> <span class="string">&#x27;&#123;if($1!=&quot; &quot;)print $1&#125;&#x27;</span> | awk BEGIN&#123;RS=EOF&#125;<span class="string">&#x27;&#123;gsub(/\n/,&quot; &quot;);print&#125;&#x27;</span>`)</span><br><span class="line">        COMPREPLY=()</span><br><span class="line">        pre=<span class="variable">$&#123;COMP_WORDS[COMP_CWORD-1]&#125;</span></span><br><span class="line">        cur=<span class="variable">$&#123;COMP_WORDS[COMP_CWORD]&#125;</span> </span><br><span class="line">        <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$pre</span>&quot;</span> == <span class="string">&quot;./s8&quot;</span> -o <span class="string">&quot;<span class="variable">$pre</span>&quot;</span> == <span class="string">&quot;s8&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">            opts=<span class="variable">$&#123;node_name_list[*]&#125;</span></span><br><span class="line">            COMPREPLY=( $( compgen -W <span class="string">&quot;<span class="variable">$opts</span>&quot;</span> -- <span class="variable">$cur</span> ) )</span><br><span class="line">        <span class="keyword">elif</span> [ `cat <span class="string">&quot;<span class="variable">$node_file</span>&quot;</span> | grep -wEc <span class="string">&quot;^<span class="variable">$pre</span>&quot;</span>` -eq <span class="string">&quot;1&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">            <span class="comment">#opts=&quot;-c &quot;</span></span><br><span class="line">            COMPREPLY=( $( compgen -W <span class="string">&quot;<span class="variable">$opts</span>&quot;</span> -- <span class="variable">$cur</span> ) )</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            opts=<span class="variable">$&#123;node_name_list[*]&#125;</span></span><br><span class="line">            COMPREPLY=( $( compgen -W <span class="string">&quot;<span class="variable">$opts</span>&quot;</span> -- <span class="variable">$cur</span> ) )</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line">complete -F _login_s8 <span class="variable">$filenames</span>  s8</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Yanzu Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://yanzu-wang.github.io/2022/05/10/ssh-tool/" title="ssh-tool">https://yanzu-wang.github.io/2022/05/10/ssh-tool/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+	<div>
+    		
+    		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------ E n d------</div>
+    
+</div>
+
+    		
+ 	</div>
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/05/Leetcode/" rel="prev" title="O(N²) Sort">
+                  <i class="fa fa-chevron-left"></i> O(N²) Sort
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yanzu Wang</span>
+</div><script color="0,0,255" opacity="0.7" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>
