@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yanzu-wang.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="BackgroudDuring the daily work, my colleagues and i need few repeated job to do. If have a APP tool help us to generate quickly. That’s will be nice. So base on python and pyqt5, i try to create such">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pyqt5-quick-tool">
+<meta property="og:url" content="https://yanzu-wang.github.io/2022/06/19/pyqt5-quick/index.html">
+<meta property="og:site_name" content="Yanzu&#39;s blog">
+<meta property="og:description" content="BackgroudDuring the daily work, my colleagues and i need few repeated job to do. If have a APP tool help us to generate quickly. That’s will be nice. So base on python and pyqt5, i try to create such">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yanzu-wang.github.io/2022/06/19/pyqt5-quick/main_win.png">
+<meta property="og:image" content="https://yanzu-wang.github.io/2022/06/19/pyqt5-quick/start_game.png">
+<meta property="og:image" content="https://yanzu-wang.github.io/2022/06/19/pyqt5-quick/instuct.png">
+<meta property="og:image" content="https://yanzu-wang.github.io/2022/06/19/pyqt5-quick/create_flavor.png">
+<meta property="article:published_time" content="2022-06-19T07:45:25.000Z">
+<meta property="article:modified_time" content="2022-06-19T08:27:47.866Z">
+<meta property="article:author" content="Yanzu Wang">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Pyqt5">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanzu-wang.github.io/2022/06/19/pyqt5-quick/main_win.png">
+
+
+<link rel="canonical" href="https://yanzu-wang.github.io/2022/06/19/pyqt5-quick/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://yanzu-wang.github.io/2022/06/19/pyqt5-quick/","path":"2022/06/19/pyqt5-quick/","title":"pyqt5-quick-tool"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>pyqt5-quick-tool | Yanzu's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yanzu's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Give you a red flower</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section">About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <div id="music163player">
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=230 height=90 src="//music.163.com/outchain/player?type=0&id=2569180495&auto=1&height=66"></iframe>
+  </div>
+
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Backgroud"><span class="nav-number">1.</span> <span class="nav-text">Backgroud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Function-show"><span class="nav-number">2.</span> <span class="nav-text">Basic Function show:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Click-Start-Game"><span class="nav-number">2.1.</span> <span class="nav-text">Click Start Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Click-Instruction"><span class="nav-number">2.2.</span> <span class="nav-text">Click Instruction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Choose-the-function-create-flavor"><span class="nav-number">2.3.</span> <span class="nav-text">Choose the function - create flavor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-Code"><span class="nav-number">3.</span> <span class="nav-text">Main Code</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yanzu Wang"
+      src="/images/10.jpg">
+  <p class="site-author-name" itemprop="name">Yanzu Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="/599170791@qq.com" title="E-Mail → 599170791@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yanzu-wang.github.io/2022/06/19/pyqt5-quick/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/10.jpg">
+      <meta itemprop="name" content="Yanzu Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yanzu's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pyqt5-quick-tool
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-06-19 15:45:25 / Modified: 16:27:47" itemprop="dateCreated datePublished" datetime="2022-06-19T15:45:25+08:00">2022-06-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Backgroud"><a href="#Backgroud" class="headerlink" title="Backgroud"></a>Backgroud</h2><p>During the daily work, my colleagues and i need few repeated job to do. If have a APP tool help us to generate quickly. That’s will be nice.</p>
+<p>So base on python and pyqt5, i try to create such tool to replace daily repeated work.</p>
+<p>Here is the Main Window!</p>
+<p><img src="/2022/06/19/pyqt5-quick/main_win.png"></p>
+<span id="more"></span>
+
+<h2 id="Basic-Function-show"><a href="#Basic-Function-show" class="headerlink" title="Basic Function show:"></a>Basic Function show:</h2><h3 id="Click-Start-Game"><a href="#Click-Start-Game" class="headerlink" title="Click Start Game"></a>Click Start Game</h3><p><img src="/2022/06/19/pyqt5-quick/start_game.png"></p>
+<h3 id="Click-Instruction"><a href="#Click-Instruction" class="headerlink" title="Click Instruction"></a>Click Instruction</h3><p><img src="/2022/06/19/pyqt5-quick/instuct.png"></p>
+<h3 id="Choose-the-function-create-flavor"><a href="#Choose-the-function-create-flavor" class="headerlink" title="Choose the function - create flavor"></a>Choose the function - create flavor</h3><p><img src="/2022/06/19/pyqt5-quick/create_flavor.png"></p>
+<h2 id="Main-Code"><a href="#Main-Code" class="headerlink" title="Main Code"></a>Main Code</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br></pre></td><td class="code"><pre><span class="line">from PyQt5.QtWidgets import *</span><br><span class="line">from PyQt5.QtCore import *</span><br><span class="line">from PyQt5.QtGui import *</span><br><span class="line"></span><br><span class="line">import about_author</span><br><span class="line">import click_start_game</span><br><span class="line">import create_flavor</span><br><span class="line">import create_ue_trace</span><br><span class="line">import instruction</span><br><span class="line">import tcpdump_script</span><br><span class="line">from quicktool_pa1 import *   <span class="comment">#MainWindow</span></span><br><span class="line">from click_start_game import *</span><br><span class="line">from create_flavor import *</span><br><span class="line">from instruction import *</span><br><span class="line">from about_author import *</span><br><span class="line">from tcpdump_script import *</span><br><span class="line">from create_ue_trace import *</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">class MainWin(QMainWindow):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.ui = Ui_MainWindow()</span><br><span class="line">        <span class="comment"># 先自定义一个Mainwindo也可以.</span></span><br><span class="line">        <span class="comment"># import_func = Ui_MainWindow()</span></span><br><span class="line">        <span class="comment"># import_func.setupUi(self.start_win)</span></span><br><span class="line">        self.ui.setupUi(self)</span><br><span class="line">        self.setWindowFlag(Qt.FramelessWindowHint)</span><br><span class="line">        self.setAttribute(Qt.WA_TranslucentBackground)</span><br><span class="line">        <span class="comment"># start_button.clicked.connect(click_start_win)</span></span><br><span class="line"></span><br><span class="line">    def mousePressEvent(self, event):</span><br><span class="line">        <span class="keyword">if</span> event.button() == Qt.LeftButton and self.isMaximized() == False:</span><br><span class="line">            self.m_flag = True</span><br><span class="line">            self.m_Position = event.globalPos() - self.pos()  <span class="comment"># 获取鼠标相对窗口的位置</span></span><br><span class="line">            event.accept()</span><br><span class="line">            self.setCursor(QCursor(Qt.OpenHandCursor))  <span class="comment"># 更改鼠标图标</span></span><br><span class="line"></span><br><span class="line">    def mouseMoveEvent(self, mouse_event):</span><br><span class="line">        <span class="keyword">if</span> Qt.LeftButton and self.m_flag:</span><br><span class="line">            self.move(mouse_event.globalPos() - self.m_Position)  <span class="comment"># 更改窗口位置</span></span><br><span class="line">            mouse_event.accept()</span><br><span class="line"></span><br><span class="line">    def mouseReleaseEvent(self, mouse_event):</span><br><span class="line">        self.m_flag = False</span><br><span class="line">        self.setCursor(QCursor(Qt.ArrowCursor))</span><br><span class="line"></span><br><span class="line">class click_start_win(QDialog):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.click_start_ui = click_start_game.Ui_Dialog()</span><br><span class="line">        self.click_start_ui.setupUi(self)</span><br><span class="line">        self.setWindowFlag(Qt.FramelessWindowHint)</span><br><span class="line">        self.setAttribute(Qt.WA_TranslucentBackground)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    def mousePressEvent(self, event):</span><br><span class="line">        <span class="keyword">if</span> event.button() == Qt.LeftButton and self.isMaximized() == False:</span><br><span class="line">            self.m_flag = True</span><br><span class="line">            self.m_Position = event.globalPos() - self.pos()  <span class="comment"># 获取鼠标相对窗口的位置</span></span><br><span class="line">            event.accept()</span><br><span class="line">            self.setCursor(QCursor(Qt.OpenHandCursor))  <span class="comment"># 更改鼠标图标</span></span><br><span class="line"></span><br><span class="line">    def mouseMoveEvent(self, mouse_event):</span><br><span class="line">        <span class="keyword">if</span> Qt.LeftButton and self.m_flag:</span><br><span class="line">            self.move(mouse_event.globalPos() - self.m_Position)  <span class="comment"># 更改窗口位置</span></span><br><span class="line">            mouse_event.accept()</span><br><span class="line"></span><br><span class="line">    def mouseReleaseEvent(self, mouse_event):</span><br><span class="line">        self.m_flag = False</span><br><span class="line">        self.setCursor(QCursor(Qt.ArrowCursor))</span><br><span class="line"></span><br><span class="line">    def close_win(self):</span><br><span class="line">        self.close()</span><br><span class="line"></span><br><span class="line">class create_flavor_cli(QDialog):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.create_flavor_ui = create_flavor.Ui_Dialog()</span><br><span class="line">        self.create_flavor_ui.setupUi(self)</span><br><span class="line">        self.setWindowFlag(Qt.FramelessWindowHint)</span><br><span class="line">        self.setAttribute(Qt.WA_TranslucentBackground)</span><br><span class="line">        <span class="comment"># self.create_flavor_button = self.click_start_ui.pushButton()</span></span><br><span class="line">        create_flavor_submit_button = self.create_flavor_ui.pushButton</span><br><span class="line">        create_flavor_submit_button.clicked.connect(self.submit_click)</span><br><span class="line">        create_flavor_return_button = self.create_flavor_ui.pushButton_2</span><br><span class="line">        create_flavor_return_button.clicked.connect(self.return_to_start)</span><br><span class="line"></span><br><span class="line">    def return_to_start(self):</span><br><span class="line">        self.close()</span><br><span class="line">        Click_start_win.show()</span><br><span class="line"></span><br><span class="line">    def submit_click(self):</span><br><span class="line">        self.cpu_pin = []</span><br><span class="line">        self.cpu_pin_list = []</span><br><span class="line">        self.cpu = self.create_flavor_ui.lineEdit_2.text()</span><br><span class="line">        self.mem = int(self.create_flavor_ui.lineEdit_3.text()) * 1024</span><br><span class="line">        self.disk = int(self.create_flavor_ui.lineEdit_4.text())</span><br><span class="line">        self.numa = self.create_flavor_ui.lineEdit_5.text()</span><br><span class="line">        self.cpu_pin = self.create_flavor_ui.lineEdit_6.text().split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">        self.flavor_prefix = self.create_flavor_ui.lineEdit.text()</span><br><span class="line">        self.flavor_name = <span class="string">&quot;%s_%svcpu_%sMBmem_%sGBdisk&quot;</span> % (self.flavor_prefix, self.cpu, self.mem, self.disk)</span><br><span class="line">        i = 0</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(self.cpu_pin)):</span><br><span class="line">            cpu_pin_propety = <span class="string">&#x27;node%s:&#123;%s&#125;&#x27;</span> % (self.numa, self.cpu_pin[i])</span><br><span class="line">            self.cpu_pin_list.append(cpu_pin_propety)</span><br><span class="line">            i += 1</span><br><span class="line">        str = <span class="string">&#x27;/&#x27;</span></span><br><span class="line">        self.cpu_pin_list_merge = str.join(self.cpu_pin_list)</span><br><span class="line">        self.create_flavor_ui.textBrowser.setFont(QtGui.QFont(<span class="string">&quot;calibri&quot;</span>, 10))</span><br><span class="line">        self.create_flavor_ui.textBrowser.setText(<span class="string">&quot;-------The CLI for creating flavor-------- \n&quot;</span> </span><br><span class="line">        <span class="string">&#x27;nova flavor-create %s auto %s %s %s \n&#x27;</span></span><br><span class="line">        <span class="string">&#x27;openstack flavor set %s --property hw:numa_memory=&quot;node%s:%s&quot; \n&#x27;</span> </span><br><span class="line">        <span class="string">&#x27;openstack flavor set %s --property hw:cpu_policy=&quot;dedicated&quot; \n&#x27;</span></span><br><span class="line">        <span class="string">&#x27;openstack flavor set %s --property  hw:numa_nodes=&quot;1&quot; \n&#x27;</span> </span><br><span class="line">        <span class="string">&#x27;openstack flavor set %s --property  hw:mem_page_size=&quot;1048576&quot; \n&#x27;</span></span><br><span class="line">        <span class="string">&#x27;openstack flavor set %s --property  hw:emulator_threads_policy=&quot;isolate&quot; \n&#x27;</span></span><br><span class="line">        <span class="string">&#x27;openstack flavor set %s --property  hw:watchdog_action=&quot;reset&quot; \n&#x27;</span></span><br><span class="line">        <span class="string">&#x27;openstack flavor set %s --property  hw:cpu_list=&quot;%s&quot;\n&#x27;</span></span><br><span class="line">        <span class="string">&#x27;-----------The End----------- \n&#x27;</span> % (self.flavor_name, self.mem, self.disk, self.cpu, self.flavor_name, self.numa, self.mem*1024, self.flavor_name, self.flavor_name, self.flavor_name, self.flavor_name, self.flavor_name, self.flavor_name, self.cpu_pin_list_merge))</span><br><span class="line"></span><br><span class="line">    def mousePressEvent(self, event):</span><br><span class="line">        <span class="keyword">if</span> event.button() == Qt.LeftButton and self.isMaximized() == False:</span><br><span class="line">            self.m_flag = True</span><br><span class="line">            self.m_Position = event.globalPos() - self.pos()  <span class="comment"># 获取鼠标相对窗口的位置</span></span><br><span class="line">            event.accept()</span><br><span class="line">            self.setCursor(QCursor(Qt.OpenHandCursor))  <span class="comment"># 更改鼠标图标</span></span><br><span class="line"></span><br><span class="line">    def mouseMoveEvent(self, mouse_event):</span><br><span class="line">        <span class="keyword">if</span> Qt.LeftButton and self.m_flag:</span><br><span class="line">            self.move(mouse_event.globalPos() - self.m_Position)  <span class="comment"># 更改窗口位置</span></span><br><span class="line">            mouse_event.accept()</span><br><span class="line"></span><br><span class="line">    def mouseReleaseEvent(self, mouse_event):</span><br><span class="line">        self.m_flag = False</span><br><span class="line">        self.setCursor(QCursor(Qt.ArrowCursor))</span><br><span class="line"></span><br><span class="line">    def close_win(self):</span><br><span class="line">        self.close()</span><br><span class="line"></span><br><span class="line">class click_instruction_win(QDialog):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.ui = instruction.Ui_Dialog()</span><br><span class="line">        self.ui.setupUi(self)</span><br><span class="line">        self.setWindowFlag(Qt.FramelessWindowHint)</span><br><span class="line">        self.setAttribute(Qt.WA_TranslucentBackground)</span><br><span class="line"></span><br><span class="line">    def mousePressEvent(self, event):</span><br><span class="line">        <span class="keyword">if</span> event.button() == Qt.LeftButton and self.isMaximized() == False:</span><br><span class="line">            self.m_flag = True</span><br><span class="line">            self.m_Position = event.globalPos() - self.pos()  <span class="comment"># 获取鼠标相对窗口的位置</span></span><br><span class="line">            event.accept()</span><br><span class="line">            self.setCursor(QCursor(Qt.OpenHandCursor))  <span class="comment"># 更改鼠标图标</span></span><br><span class="line"></span><br><span class="line">    def mouseMoveEvent(self, mouse_event):</span><br><span class="line">        <span class="keyword">if</span> Qt.LeftButton and self.m_flag:</span><br><span class="line">            self.move(mouse_event.globalPos() - self.m_Position)  <span class="comment"># 更改窗口位置</span></span><br><span class="line">            mouse_event.accept()</span><br><span class="line"></span><br><span class="line">    def mouseReleaseEvent(self, mouse_event):</span><br><span class="line">        self.m_flag = False</span><br><span class="line">        self.setCursor(QCursor(Qt.ArrowCursor))</span><br><span class="line"></span><br><span class="line">class click_about_win(QDialog):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.ui = about_author.Ui_Dialog()</span><br><span class="line">        self.ui.setupUi(self)</span><br><span class="line">        self.setWindowFlag(Qt.FramelessWindowHint)</span><br><span class="line">        self.setAttribute(Qt.WA_TranslucentBackground)</span><br><span class="line"></span><br><span class="line">    def mousePressEvent(self, event):</span><br><span class="line">        <span class="keyword">if</span> event.button() == Qt.LeftButton and self.isMaximized() == False:</span><br><span class="line">            self.m_flag = True</span><br><span class="line">            self.m_Position = event.globalPos() - self.pos()  <span class="comment"># 获取鼠标相对窗口的位置</span></span><br><span class="line">            event.accept()</span><br><span class="line">            self.setCursor(QCursor(Qt.OpenHandCursor))  <span class="comment"># 更改鼠标图标</span></span><br><span class="line"></span><br><span class="line">    def mouseMoveEvent(self, mouse_event):</span><br><span class="line">        <span class="keyword">if</span> Qt.LeftButton and self.m_flag:</span><br><span class="line">            self.move(mouse_event.globalPos() - self.m_Position)  <span class="comment"># 更改窗口位置</span></span><br><span class="line">            mouse_event.accept()</span><br><span class="line"></span><br><span class="line">    def mouseReleaseEvent(self, mouse_event):</span><br><span class="line">        self.m_flag = False</span><br><span class="line">        self.setCursor(QCursor(Qt.ArrowCursor))</span><br><span class="line"></span><br><span class="line">class create_ue_trace_win(QDialog):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.create_ue_trace_ui = create_ue_trace.Ui_Dialog()</span><br><span class="line">        self.create_ue_trace_ui.setupUi(self)</span><br><span class="line">        self.setWindowFlag(Qt.FramelessWindowHint)</span><br><span class="line">        self.setAttribute(Qt.WA_TranslucentBackground)</span><br><span class="line">        create_ue_trace_submit_button = self.create_ue_trace_ui.pushButton</span><br><span class="line">        create_ue_trace_submit_button.clicked.connect(self.submit_click)</span><br><span class="line">        create_ue_trace_return_button = self.create_ue_trace_ui.pushButton_2</span><br><span class="line">        create_ue_trace_return_button.clicked.connect(self.return_to_start)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    def mousePressEvent(self, event):</span><br><span class="line">        <span class="keyword">if</span> event.button() == Qt.LeftButton and self.isMaximized() == False:</span><br><span class="line">            self.m_flag = True</span><br><span class="line">            self.m_Position = event.globalPos() - self.pos()  <span class="comment"># 获取鼠标相对窗口的位置</span></span><br><span class="line">            event.accept()</span><br><span class="line">            self.setCursor(QCursor(Qt.OpenHandCursor))  <span class="comment"># 更改鼠标图标</span></span><br><span class="line"></span><br><span class="line">    def mouseMoveEvent(self, mouse_event):</span><br><span class="line">        <span class="keyword">if</span> Qt.LeftButton and self.m_flag:</span><br><span class="line">            self.move(mouse_event.globalPos() - self.m_Position)  <span class="comment"># 更改窗口位置</span></span><br><span class="line">            mouse_event.accept()</span><br><span class="line"></span><br><span class="line">    def mouseReleaseEvent(self, mouse_event):</span><br><span class="line">        self.m_flag = False</span><br><span class="line">        self.setCursor(QCursor(Qt.ArrowCursor))</span><br><span class="line"></span><br><span class="line">    def return_to_start(self):</span><br><span class="line">        self.close()</span><br><span class="line">        Click_start_win.show()</span><br><span class="line"></span><br><span class="line">    def submit_click(self):</span><br><span class="line">        self.imsi = str(self.create_ue_trace_ui.lineEdit_2.text())</span><br><span class="line">        self.trace_ref = self.imsi[3:]</span><br><span class="line">        self.create_ue_trace_ui.textBrowser_2.setFont(QtGui.QFont(<span class="string">&quot;calibri&quot;</span>, 11))</span><br><span class="line">        self.create_ue_trace_ui.textBrowser_2.setText(......)</span><br><span class="line"></span><br><span class="line">class tcpdump_script_win(QDialog):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.tcpdump_script_ui = tcpdump_script.Ui_Dialog()</span><br><span class="line">        self.tcpdump_script_ui.setupUi(self)</span><br><span class="line">        self.setWindowFlag(Qt.FramelessWindowHint)</span><br><span class="line">        self.setAttribute(Qt.WA_TranslucentBackground)</span><br><span class="line">        tcpdump_script_submit_button = self.tcpdump_script_ui.pushButton</span><br><span class="line">        tcpdump_script_submit_button.clicked.connect(self.submit_click)</span><br><span class="line">        tcpdump_script_return_button = self.tcpdump_script_ui.pushButton_3</span><br><span class="line">        tcpdump_script_return_button.clicked.connect(self.return_to_start)</span><br><span class="line"></span><br><span class="line">    def return_to_start(self):</span><br><span class="line">        self.close()</span><br><span class="line">        Click_start_win.show()</span><br><span class="line"></span><br><span class="line">    def submit_click(self):</span><br><span class="line">        self.node = str(self.tcpdump_script_ui.lineEdit_2.text()).split(<span class="string">&quot;,&quot;</span>)</span><br><span class="line">        self.node_list = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> self.node:</span><br><span class="line">            self.node_list += item+<span class="string">&#x27; &#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(self.node_list)</span><br><span class="line">        self.node_eth = str(self.tcpdump_script_ui.lineEdit_3.text())</span><br><span class="line">        self.host = str(self.tcpdump_script_ui.lineEdit_4.text())</span><br><span class="line">        self.tcpdump_script_ui.textBrowser_2.setFont(QtGui.QFont(<span class="string">&quot;calibri&quot;</span>, 11))</span><br><span class="line">        self.tcpdump_script_ui.textBrowser_2.setText(<span class="string">&quot;-------The Shell Script for tcpdump on specified worker node-------- \n&quot;</span></span><br><span class="line"><span class="string">&#x27;&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">#!/bin/bash</span></span><br><span class="line"><span class="string">#path to store captures</span></span><br><span class="line"><span class="string">storePath=$(readlink -f &quot;$(dirname &quot;$0&quot;)&quot;)</span></span><br><span class="line"><span class="string">nodes=(%s)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if [ &quot;$1&quot; = &quot;start&quot; ];</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">for p in &quot;$&#123;nodes[@]&#125;&quot;; do</span></span><br><span class="line"><span class="string">    ssh $p sudo tcpdump -s0 -i %s %s -w capture-$p.pcap -G 900 -W 1  &gt;/dev/null 2&gt;&amp;1 &amp;</span></span><br><span class="line"><span class="string">    echo &quot;tcpdump started on $p&quot;</span></span><br><span class="line"><span class="string">done</span></span><br><span class="line"><span class="string">else</span></span><br><span class="line"><span class="string">     if [ &quot;$1&quot; = &quot;stop&quot; ];</span></span><br><span class="line"><span class="string">     then</span></span><br><span class="line"><span class="string">     for p in &quot;$&#123;nodes[@]&#125;&quot;; do</span></span><br><span class="line"><span class="string">             tcpdumpPID=`ssh $p ps aux | grep $p | grep tcpdump | grep -v grep  | awk &#x27;</span>(NR==2) &#123;<span class="built_in">print</span> <span class="variable">$2</span>&#125;<span class="string">&#x27;`</span></span><br><span class="line"><span class="string">             ssh $p sudo kill $tcpdumpPID</span></span><br><span class="line"><span class="string">             scp yanzu@$p:~/capture-$p.pcap $storePath</span></span><br><span class="line"><span class="string">             ssh $p sudo rm ~/capture-$p.pcap</span></span><br><span class="line"><span class="string">             echo &quot;tcpdump is stopped on $p&quot;</span></span><br><span class="line"><span class="string">     done</span></span><br><span class="line"><span class="string">     else</span></span><br><span class="line"><span class="string">             echo &quot;The usage is ./tcpdumpTraces.sh &lt;start/stop&gt;&quot;</span></span><br><span class="line"><span class="string">     fi</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">&#x27;</span><span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="string">&quot;-------The Step to run above script-------- \n&quot;</span></span><br><span class="line">        <span class="string">&quot;Step1. vi tcpdumpTraces.sh ; copy script into tcpdumpTraces.sh and save \n&quot;</span></span><br><span class="line">        <span class="string">&quot;Step2. chmod +x tcpdumpTraces.sh \n&quot;</span></span><br><span class="line">        <span class="string">&quot;Step3. ./tcpdumpTraces.sh start \n&quot;</span></span><br><span class="line">        <span class="string">&quot;Step4. If you want to stop the trace, use ./tcpdumpTraces.sh stop \n&quot;</span></span><br><span class="line">        <span class="string">&quot;The pcap file will show on current direcory. \n&quot;</span></span><br><span class="line">        <span class="string">&quot;----------The End------------&quot;</span> % (self.node_list, self.node_eth, self.host))</span><br><span class="line"></span><br><span class="line">    def mousePressEvent(self, event):</span><br><span class="line">        <span class="keyword">if</span> event.button() == Qt.LeftButton and self.isMaximized() == False:</span><br><span class="line">            self.m_flag = True</span><br><span class="line">            self.m_Position = event.globalPos() - self.pos()  <span class="comment"># 获取鼠标相对窗口的位置</span></span><br><span class="line">            event.accept()</span><br><span class="line">            self.setCursor(QCursor(Qt.OpenHandCursor))  <span class="comment"># 更改鼠标图标</span></span><br><span class="line"></span><br><span class="line">    def mouseMoveEvent(self, mouse_event):</span><br><span class="line">        <span class="keyword">if</span> Qt.LeftButton and self.m_flag:</span><br><span class="line">            self.move(mouse_event.globalPos() - self.m_Position)  <span class="comment"># 更改窗口位置</span></span><br><span class="line">            mouse_event.accept()</span><br><span class="line"></span><br><span class="line">    def mouseReleaseEvent(self, mouse_event):</span><br><span class="line">        self.m_flag = False</span><br><span class="line">        self.setCursor(QCursor(Qt.ArrowCursor))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app = QApplication(sys.argv) <span class="comment"># 初始化, sys.argv 定义传入命令行</span></span><br><span class="line">    Mainwin = MainWin()</span><br><span class="line">    Click_start_win = click_start_win()</span><br><span class="line">    Click_instruction_win = click_instruction_win()</span><br><span class="line">    Click_about_win = click_about_win()</span><br><span class="line">    Mainwin.show()</span><br><span class="line">    <span class="comment"># 当点击start game时候</span></span><br><span class="line">    start_button = Mainwin.ui.start</span><br><span class="line">    start_button.clicked.connect(Click_start_win.show)</span><br><span class="line">    <span class="comment"># 当点击 Instuction 时候</span></span><br><span class="line">    instruction_button = Mainwin.ui.tip</span><br><span class="line">    instruction_button.clicked.connect(Click_instruction_win.show)</span><br><span class="line">    <span class="comment"># 当点击About Author时候</span></span><br><span class="line">    about_button = Mainwin.ui.about</span><br><span class="line">    about_button.clicked.connect(Click_about_win.show)</span><br><span class="line">    <span class="comment">#当点击create flavor时</span></span><br><span class="line">    Create_flavor_win = create_flavor_cli()</span><br><span class="line">    create_flavor_button = Click_start_win.click_start_ui.pushButton</span><br><span class="line">    create_flavor_button.clicked.connect(Click_start_win.close_win)</span><br><span class="line">    create_flavor_button.clicked.connect(Create_flavor_win.show)</span><br><span class="line">    <span class="comment">#当点击uetrace时</span></span><br><span class="line">    Create_ue_trace_win = create_ue_trace_win()</span><br><span class="line">    create_ue_trace_button = Click_start_win.click_start_ui.pushButton_2</span><br><span class="line">    create_ue_trace_button.clicked.connect(Click_start_win.close_win)</span><br><span class="line">    create_ue_trace_button.clicked.connect(Create_ue_trace_win.show)</span><br><span class="line">    <span class="comment">#当点击worker tcpdump时</span></span><br><span class="line">    Create_worker_tcpdump_win = tcpdump_script_win()</span><br><span class="line">    create_worker_tcpdump_win_button = Click_start_win.click_start_ui.pushButton_3</span><br><span class="line">    create_worker_tcpdump_win_button.clicked.connect(Click_start_win.close_win)</span><br><span class="line">    create_worker_tcpdump_win_button.clicked.connect(Create_worker_tcpdump_win.show)</span><br><span class="line"></span><br><span class="line">    app.exec()</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Yanzu Wang
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://yanzu-wang.github.io/2022/06/19/pyqt5-quick/" title="pyqt5-quick-tool">https://yanzu-wang.github.io/2022/06/19/pyqt5-quick/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+	<div>
+    		
+    		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------ E n d------</div>
+    
+</div>
+
+    		
+ 	</div>
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+              <a href="/tags/Pyqt5/" rel="tag"><i class="fa fa-tag"></i> Pyqt5</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/10/ssh-tool/" rel="prev" title="ssh-tool">
+                  <i class="fa fa-chevron-left"></i> ssh-tool
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yanzu Wang</span>
+</div><script color="0,0,255" opacity="0.7" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>
