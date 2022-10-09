@@ -20,16 +20,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"yanzu-wang.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="tags:   Java algorithm   BackgroudTry write the basic code algorithm by myself when i start to learn java. Code">
+<meta name="description" content="BackgroudTry write the basic code algorithm by myself when i start to learn java. Code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode-Java-1">
 <meta property="og:url" content="https://yanzu-wang.github.io/2022/10/09/Leetcode-Java-1/index.html">
 <meta property="og:site_name" content="Yanzu&#39;s blog">
-<meta property="og:description" content="tags:   Java algorithm   BackgroudTry write the basic code algorithm by myself when i start to learn java. Code">
+<meta property="og:description" content="BackgroudTry write the basic code algorithm by myself when i start to learn java. Code">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-10-09T04:33:47.000Z">
-<meta property="article:modified_time" content="2022-10-09T04:34:23.785Z">
+<meta property="article:modified_time" content="2022-10-09T04:38:24.209Z">
 <meta property="article:author" content="Yanzu Wang">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="algorithm">
 <meta name="twitter:card" content="summary">
 
 
@@ -178,7 +180,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -247,7 +249,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-10-09 12:33:47 / Modified: 12:34:23" itemprop="dateCreated datePublished" datetime="2022-10-09T12:33:47+08:00">2022-10-09</time>
+      <time title="Created: 2022-10-09 12:33:47 / Modified: 12:38:24" itemprop="dateCreated datePublished" datetime="2022-10-09T12:33:47+08:00">2022-10-09</time>
     </span>
 
   
@@ -260,13 +262,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>tags: </p>
-<ul>
-<li>Java</li>
-<li>algorithm</li>
-</ul>
-<hr>
-<h1 id="Backgroud"><a href="#Backgroud" class="headerlink" title="Backgroud"></a>Backgroud</h1><p>Try write the basic code algorithm by myself when i start to learn java.</p>
+        <h1 id="Backgroud"><a href="#Backgroud" class="headerlink" title="Backgroud"></a>Backgroud</h1><p>Try write the basic code algorithm by myself when i start to learn java.</p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><span id="more"></span>
 
 <h2 id="SelecSort"><a href="#SelecSort" class="headerlink" title="SelecSort"></a>SelecSort</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class selectSort &#123;</span><br><span class="line">    /*</span><br><span class="line">    实现原理：从一个[0....N-1]数组中，依次遍历，选择最小的值与第一个数进行交换</span><br><span class="line">    时间复杂度为O(N²)</span><br><span class="line">     */</span><br><span class="line">    public static void main(String[] args)</span><br><span class="line">    &#123;</span><br><span class="line">        int[] numlist = &#123; 10, 6, 2, 1, 4, 3 &#125;;</span><br><span class="line">        selectsort(numlist);</span><br><span class="line">        System.out.println(Arrays.toString(numlist));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void selectsort (int[] numlist) &#123;</span><br><span class="line">        // List&lt;Integer&gt; numlist = Arrays.asList(3, 2, 4, 1, 10, 9);</span><br><span class="line">        // key: 总共需要N-1次比较</span><br><span class="line">        <span class="keyword">for</span> (int i=0; i&lt;(numlist.length-1); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (int j=i+1; j&lt;numlist.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (numlist[i] &gt; numlist[j]) &#123;</span><br><span class="line">                    // 互换位置</span><br><span class="line">                    int first = numlist[i];</span><br><span class="line">                    int small = numlist[j];</span><br><span class="line">                    numlist[i] = small;</span><br><span class="line">                    numlist[j] = first;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -313,6 +309,10 @@
 
     		
  	</div>
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+              <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+          </div>
 
         
 
